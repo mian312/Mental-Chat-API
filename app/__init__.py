@@ -36,19 +36,19 @@ def chat(uid: int, question: Query):
     # Store the updated history back in the dictionary
     save_user_history(uid, new_chat)
 
-    return {"userID": uid, "response": result}
+    return {"userID": uid, "response": result, "history": history}
 
 
 # ** API to get user history **
 
-@app.get("/api/history/{uid}")
+@app.post("/api/history/{uid}")
 def user_history(uid: int):
     history = get_user_history(uid)
     return history
 
 # ** API to get user sentiment record**
 
-@app.get("/api/user_sentiment/{uid}")
+@app.post("/api/user_sentiment/{uid}")
 def user_sentiment(uid: int):
     history = get_user_history(uid)
     sentiment_record = []
